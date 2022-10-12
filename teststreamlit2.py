@@ -38,13 +38,13 @@ if st.sidebar.button('Home',key = "1"):
     st.markdown('**Dashboard Chargemaps Netherlands**')
    # st.markdown('This dashboard is made to visualize every subject around the covid pandemic. On the left side of the screen are buttons to select a specific subject. Every subject has his own graphs and description.')
     st.markdown('A Dashboard made to visualize different datasets; The openchargemap was used to visualize the the different EV and their corresponding chargingtime, these visualization are grouped into different categories, where the following topics are analyzed; amount of Chargestations with their corresponding municipality or province visualized on the OpenChargeMap ')
-    st.sidebar.button('Elektrische Voertuigen',key = "2")
+    st.sidebar.button('Voertuigen',key = "2")
     st.sidebar.button('Locations',key = "3")
     st.sidebar.button('Charging stations ',key = "4")
     st.sidebar.button('Statistic explanations',key = "5")
 #elif st.sidebar.button('Cases', key = "6"):
-elif st.sidebar.button('Elektrische Voertuigen', key = "6"):
-        st.header('Elektrische Voertuigen')
+elif st.sidebar.button('Voertuigen', key = "6"):
+        st.header('Voertuigen')
         st.markdown('**Dashboard Elektrische Voertuigen*') 
     #st.markdown('Here you can find some visualizations of total cases around the world, per region, per country and per 100.000 inhabitants')
         st.markdown('Hier Data en visuele data voor de EVs in Nederland.')
