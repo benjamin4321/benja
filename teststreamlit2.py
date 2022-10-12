@@ -9,9 +9,9 @@ import numpy as np
 import requests
 import json
 #import plotly.express as px
-from shapely.geometry import Point
+#from shapely.geometry import Point
 #!pip install missingno
-import missingno as msno
+#import missingno as msno
 #!pip install streamlit
 import streamlit as st
 
