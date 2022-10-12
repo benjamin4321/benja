@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import requests
 import json
-import plotly.express as px
+#import plotly.express as px
 from shapely.geometry import Point
 #!pip install missingno
 import missingno as msno
