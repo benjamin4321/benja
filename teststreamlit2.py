@@ -50,7 +50,7 @@ elif st.sidebar.button('Elektrische Voertuigen', key = "6"):
         st.markdown('Hier Data en visuele data voor de EVs in Nederland.')
     #st.plotly_chart(fig3)
     #st.plotly_chart(fig4)
-        st.sidebar.button('Home',key = "7")
+        st.sidebar.button('Return',key = "7")
 #elif st.sidebar.button('Deaths', key = "8"):
 elif st.sidebar.button('Locaties', key = "8"):
         st.header('Gemeentes & provincies')
@@ -61,7 +61,7 @@ elif st.sidebar.button('Locaties', key = "8"):
         st.markdown('visualizaties voor de locaties per gemeente en provincie, hierbij wordt weer gekeken naar de laadpaal data en de OpenChargemap, om relevant informatie te tonen.')
     #st.plotly_chart(fig5)
     #st.plotly_chart(fig6)
-        st.sidebar.button('Home',key = "9")
+        st.sidebar.button('Return',key = "9")
 #elif st.sidebar.button('Vaccinations', key = "10"):
 elif st.sidebar.button('Laadpaal', key = "10"):
         st.header('Charging stations')
@@ -71,13 +71,13 @@ elif st.sidebar.button('Laadpaal', key = "10"):
         st.markdown('Hier gaan we diepgaand analyseren hoe de laadpaal data eruit ziet en hoe munipulaties worden uitgevoerd om conclusies te maken. Ook word er visueel aangetond hoe statistische variabelen relatie hebben met elkaar.')
     #st.plotly_chart(fig1)
     #st.plotly_chart(fig2)
-        st.sidebar.button('Home',key = "11")
+        st.sidebar.button('Return',key = "11")
 elif st.sidebar.button('Statistic explanations',key = "12"):
     #st.header('Total Recovered')
     #st.markdown('**Welcome to the Covid19 dashboard of total recovered people from covid19**') 
     #st.markdown('Here you can find some visualizations of recovering form covid19 around the world, per region, per country and per 100.000 inhabitants')
     #st.plotly_chart(fig7)
-        st.sidebar.button('Home', key = "13")
+        st.sidebar.button('Return', key = "13")
 #elif st.sidebar.button('Manufactures',key = "14"):
     #st.header('Total Manufacturers')
     #st.markdown('**Welcome to the Covid19 dashboard of manufacturers**') 
