@@ -46,7 +46,9 @@ if st.sidebar.button('Home',key = "1"):
 elif st.sidebar.button('Voertuigen', key = "6"):
         st.header('Voertuigen')
         st.markdown('**Dashboard Elektrische Voertuigen*') 
-    #st.markdown('Here you can find some visualizations of total cases around the world, per region, per country and per 100.000 inhabitants')
+    st.markdown('Hier worden visualisaties gemaakt over desbetreffend autos, die dan tegenover de verkoop permaand worden gezet.') 
+    st.markdown('Pie chart in percentages. waarbij de auto per brandstof in het totaal worden gevisualiseerd.')
+     st.markdown('Aantal autos die verkocht worden per maand gesorteerd op type auto. Aantal voertuigen tegenover het gewicht.')
         st.markdown('Hier Data en visuele data voor de EVs in Nederland.')
     #st.plotly_chart(fig3)
     #st.plotly_chart(fig4)
