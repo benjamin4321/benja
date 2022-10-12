@@ -25,13 +25,52 @@ import streamlit as st
 ####################################################################################################################################################################################################################
 ##################################################################################################################################################################################
 #######################################################################################################################################################################################
-######                          DATAFRAME CODES                 #########
+######                          DATAFRAME CODES  (case3 bestand van maxim gekregen op 12-10-2022               #########
+#################### zijn deze codes in orde?###
 df_laadpaal = pd.read_csv("laadpaaldata.csv")
-#df_laadpaal.head()
 df_laadpaal["TotalEnergy"] = df_laadpaal["TotalEnergy"] / 1000
 df_laadpaal["MaxPower"] = df_laadpaal["MaxPower"] / 1000
-#df_laadpaal.head()
+df_laadpaal = df_laadpaal.drop(df_laadpaal[df_laadpaal.ChargeTime < 0].index)
+df_locatie = requests.get('https://api.openchargemap.io/v3/poi?key=123?output=json&countrycode=NL')
+df_locatie.json()
+URL3 = requests.get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=j9OjMxvLi7CazM7CK2fssR5D5&$where=Datum_eerste_toelating>20180101&$select=Kenteken,Voertuigsoort,Merk,Handelsbenaming,Massa_rijklaar,Datum_eerste_toelating&$limit=1000000")
+z = URL3.json()
+df_kenteken = pd.DataFrame(z)
+URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=14200000")
+a = URL4.json()
+df_brandstof = pd.DataFrame(a)
+df_brandstof
+df_voertuigen = df_kenteken.merge(df_brandstof, on = "Kenteken", how = "inner")
+df_voertuigen
+df_voertuigen_na = df_voertuigen[df_voertuigen["Massa_rijklaar"].isna()]
+df_voertuigen_na
+df_voertuigen = df_voertuigen.dropna()
+df_voertuigen['Massa_rijklaar'] = df_voertuigen['Massa_rijklaar'].astype('int')
+duplicates = df_voertuigen["Kenteken"].duplicated()
+print(duplicates)
+df_voertuigen[duplicates]
 
+uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
+print(uitschieter)
+
+df_voertuigen.drop(df_voertuigen[df_voertuigen.Massa_rijklaar > 20000].index, inplace=True)
+df_voertuigen.drop_duplicates(subset="Kenteken", keep = "first", inplace = True)
+
+#geen spel fouten
+merk_handel = df_voertuigen['Merk'].value_counts().sort_values(ascending = False)
+merk_handel.head(70)
+
+
+df_voertuigen["Datum_eerste_toelating"] = pd.to_datetime(df_voertuigen['Datum_eerste_toelating'], format='%Y%m%d')
+df_voertuigen.head()
+
+df_voertuigen_aantal = df_voertuigen.groupby(
+    ["Datum_eerste_toelating", "Brandstof_omschrijving"]
+)['Kenteken'].count().reset_index(name='aantal')
+df_voertuigen_aantal
+
+df_voertuigen_aantal['month_year'] = pd.to_datetime(df_voertuigen_aantal['Datum_eerste_toelating']).dt.to_period('M')
+df_voertuigen_aantal
 
 # In[ ]:
 
