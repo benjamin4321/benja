@@ -51,26 +51,26 @@ duplicates = df_voertuigen["Kenteken"].duplicated()
 df_voertuigen[duplicates]
 
 uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
-print(uitschieter)
+#print(uitschieter)
 
 df_voertuigen.drop(df_voertuigen[df_voertuigen.Massa_rijklaar > 20000].index, inplace=True)
 df_voertuigen.drop_duplicates(subset="Kenteken", keep = "first", inplace = True)
 
 #geen spel fouten
 merk_handel = df_voertuigen['Merk'].value_counts().sort_values(ascending = False)
-merk_handel.head(70)
+#merk_handel.head(70)
 
 
 df_voertuigen["Datum_eerste_toelating"] = pd.to_datetime(df_voertuigen['Datum_eerste_toelating'], format='%Y%m%d')
-df_voertuigen.head()
+#df_voertuigen.head()
 
 df_voertuigen_aantal = df_voertuigen.groupby(
     ["Datum_eerste_toelating", "Brandstof_omschrijving"]
 )['Kenteken'].count().reset_index(name='aantal')
-df_voertuigen_aantal
+#df_voertuigen_aantal
 
 df_voertuigen_aantal['month_year'] = pd.to_datetime(df_voertuigen_aantal['Datum_eerste_toelating']).dt.to_period('M')
-df_voertuigen_aantal
+#df_voertuigen_aantal
 
 # In[ ]:
 
