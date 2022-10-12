@@ -39,15 +39,15 @@ df_kenteken = pd.DataFrame(z)
 URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=14200000")
 a = URL4.json()
 df_brandstof = pd.DataFrame(a)
-df_brandstof
+#df_brandstof
 df_voertuigen = df_kenteken.merge(df_brandstof, on = "Kenteken", how = "inner")
-df_voertuigen
+#df_voertuigen
 df_voertuigen_na = df_voertuigen[df_voertuigen["Massa_rijklaar"].isna()]
-df_voertuigen_na
+#df_voertuigen_na
 df_voertuigen = df_voertuigen.dropna()
 df_voertuigen['Massa_rijklaar'] = df_voertuigen['Massa_rijklaar'].astype('int')
 duplicates = df_voertuigen["Kenteken"].duplicated()
-print(duplicates)
+#print(duplicates)
 df_voertuigen[duplicates]
 
 uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
