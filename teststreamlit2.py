@@ -48,7 +48,7 @@ df_voertuigen = df_voertuigen.dropna()
 df_voertuigen['Massa_rijklaar'] = df_voertuigen['Massa_rijklaar'].astype('int')
 duplicates = df_voertuigen["Kenteken"].duplicated()
 #print(duplicates)
-df_voertuigen[duplicates]
+#df_voertuigen[duplicates]
 
 uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
 #print(uitschieter)
