@@ -403,7 +403,7 @@ elif st.sidebar.button('Locaties', key = "8"):
     st.plotly_chart(fig11)
     st.markdown('Wat opvalt aan de plot is dat er een grote dichtheid aan laadpalen in Nederland aanwezig is.')
     st.sidebar.button('Return',key = "9")
-
+#########################################LAADPALEN
 elif st.sidebar.button('Laadpaal', key = "10"):
         st.header('Charging stations')
         st.markdown('**Dashboard for the Charging stations**')      
@@ -429,12 +429,7 @@ elif st.sidebar.button('Laadpaal', key = "10"):
   
    
         st.sidebar.button('Return',key = "11")
-elif st.sidebar.button('Statistic explanations',key = "12"):
-    #st.header('Total Recovered')
-    #st.markdown('**Welcome to the Covid19 dashboard of total recovered people from covid19**') 
-    #st.markdown('Here you can find some visualizations of recovering form covid19 around the world, per region, per country and per 100.000 inhabitants')
-    #st.plotly_chart(fig7)
-        st.sidebar.button('Return', key = "13")
+
 
 else :
     st.header('Home')
