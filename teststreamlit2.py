@@ -100,11 +100,11 @@ fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 0.75,'show
 #dataframe codes MAXIM Voertuigen######################################################################################################
 
 URL3 = requests.get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=j9OjMxvLi7CazM7CK2fssR5D5&$where=Datum_eerste_toelating>20180101&$select=Kenteken,Voertuigsoort,Merk,Handelsbenaming,Massa_rijklaar,Datum_eerste_toelating&$limit=1000000")
-#z = URL3.json()
-#df_kenteken = pd.DataFrame(z)
-#URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=14200000")
-#a = URL4.json()
-#df_brandstof = pd.DataFrame(a)
+z = URL3.json()
+df_kenteken = pd.DataFrame(z)
+URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=14200000")
+a = URL4.json()
+df_brandstof = pd.DataFrame(a)
 #df_brandstof
 #df_voertuigen = df_kenteken.merge(df_brandstof, on = "Kenteken", how = "inner")
 #df_voertuigen
