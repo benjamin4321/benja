@@ -27,7 +27,7 @@ locatie2 = locatie1.json()
 df_locatie = pd.DataFrame(locatie2)
 
 addressinfo = df_locatie['AddressInfo']
-addressinfo.loc[0]
+print(addressinfo.loc[0])
 lijst = []
 
 for x in addressinfo:
@@ -64,7 +64,7 @@ df_locatie1 = df_locatie['Provincie'].value_counts().sort_values(ascending = Fal
 
 fig11 = px.scatter_mapbox(df_locatie,
     lon = df_locatie_geo['LNG'], lat = df_locatie_geo['LAT'], color = df_locatie.Provincie,
-                        mapbox_style = 'open-street-map', animation_group = 'Provincie', width = 2300, height = 2000, zoom = 7.5
+                        mapbox_style = 'open-street-map', animation_group = 'Provincie', width = 1400, height = 1700, zoom = 7.5
     
                         
         
@@ -317,11 +317,10 @@ elif st.sidebar.button('Locaties', key = "8"):
     
     st.header('Provincies')
     st.markdown('Laadpalen in totaal gelegen in Nederland en bijbehorende provincie.')
-    st.plotly_chart(fig11)
+    
 
     st.markdown('visualizaties voor de locaties per gemeente en provincie, hierbij wordt weer gekeken naar de laadpaal data en de OpenChargemap, om relevant informatie te tonen.')
-    #st.plotly_chart(fig5)
-    #st.plotly_chart(fig6)
+    st.plotly_chart(fig11)
     st.sidebar.button('Return',key = "9")
 
 elif st.sidebar.button('Laadpaal', key = "10"):
