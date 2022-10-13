@@ -64,7 +64,7 @@ df_locatie1 = df_locatie['Provincie'].value_counts().sort_values(ascending = Fal
 
 fig11 = px.scatter_mapbox(df_locatie,
     lon = df_locatie_geo['LNG'], lat = df_locatie_geo['LAT'], color = df_locatie.Provincie,
-                        mapbox_style = 'open-street-map', animation_group = 'Provincie', width = 1400, height = 1700, zoom = 7.5
+                        mapbox_style = 'open-street-map', animation_group = 'Provincie', width = 1500, height = 1700, zoom = 7.5
     
                         
         
@@ -92,7 +92,7 @@ fig11.update_layout(
 
 lat_foc = 52.09061
 lng_foc = 5.12143
-fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.6,'y': 1.0,'showactive': True,'active': 0,'buttons': dropdown_buttons}]},
+fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 1.0,'showactive': True,'active': 0,'buttons': dropdown_buttons}]},
     geo = dict(
     projection_scale = 11,
     center = dict(lat = lat_foc, lon=lng_foc)
