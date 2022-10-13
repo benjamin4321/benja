@@ -166,7 +166,7 @@ fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 0.75,'show
 
 #df_voertuigen_soort_aantal = df_voertuigen.groupby(
 #    ["Voertuigsoort", "Brandstof_omschrijving"]
-)['Kenteken'].count().reset_index(name='aantal')
+#)['Kenteken'].count().reset_index(name='aantal')
 #df_voertuigen_soort_aantal
 
 #fig23 = px.bar(df_voertuigen_soort_aantal, x='Voertuigsoort', y='aantal', color = "Brandstof_omschrijving", title = 'Aantal autos verkocht per maand',
