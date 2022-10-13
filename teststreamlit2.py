@@ -128,7 +128,7 @@ df_laadpaal = df_laadpaal.dropna(axis = 0)
 df_laadpaal["Paalkleeftijd"] = df_laadpaal["ConnectedTime"] - df_laadpaal["ChargeTime"]
 
 df_laadpaal.boxplot(column='MaxPower')
-mnso.matrix(df_laadpaal)
+#mnso.matrix(df_laadpaal)
 
 ### totaal verbruikte energie
 fig1 = px.histogram(df_laadpaal, x="TotalEnergy")
