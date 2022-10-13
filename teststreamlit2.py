@@ -244,7 +244,7 @@ elif st.sidebar.button('Laadpaal', key = "10"):
         st.header('Charging stations')
         st.markdown('**Dashboard for the Charging stations**')      
         st.markdown('Hier gaan we diepgaand analyseren hoe de laadpaal data eruit ziet en hoe munipulaties worden uitgevoerd om conclusies te maken. Ook word er visueel aangetond hoe statistische variabelen relatie hebben met elkaar.')
-        print(print_model)
+        st.write(print_model)
     #st.plotly_chart(fig1)
     #st.plotly_chart(fig2)
         st.sidebar.button('Return',key = "11")
