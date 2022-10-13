@@ -14,6 +14,7 @@ import plotly.figure_factory as ff
 from shapely.geometry import Point
 #!pip install missingno
 import missingno as msno
+import statsmodels.api as sm
 #!pip install streamlit
 import streamlit as st
 
