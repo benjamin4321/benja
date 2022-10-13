@@ -18,7 +18,7 @@ import streamlit as st
 
 
 #dataframe codes
-#df_laadpaal = pd.read_csv("laadpaaldata.csv")
+df_laadpaal = pd.read_csv("laadpaaldata.csv")
 #df_laadpaal["TotalEnergy"] = df_laadpaal["TotalEnergy"] / 1000
 #df_laadpaal["MaxPower"] = df_laadpaal["MaxPower"] / 1000
 #df_laadpaal = df_laadpaal.drop(df_laadpaal[df_laadpaal.ChargeTime < 0].index)
