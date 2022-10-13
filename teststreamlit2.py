@@ -163,10 +163,10 @@ fig8 = px.histogram(df_laadpaal, x="MaxPower")
 fig8.update_layout(title="Maximaal gevraagd vermogen", xaxis_title="Vermogen (W)",
                   yaxis_title="Aantal")
 ##Scatter
-fig9 = px.scatter(df_laadpaal, x="ChargeTime", y="ConnectedTime")
-fig9.update_layout(title="Tijd verbonden aan laadpaal in verband met werkelijk aan het laden", 
-                  xaxis_title="Tijd aan het laden (uren)", trendline = "ols",
-                  yaxis_title="Tijd verbonden (uren)")
+fig9 = px.scatter(df_laadpaal, x="ChargeTime", y="ConnectedTime", trendline = "ols")
+fig9.update_layout(title="Tijd verbonden aan laadpaal in verband met werkelijk aan het laden",
+                   xaxis_title="Tijd aan het laden (uren)",
+                   yaxis_title="Tijd verbonden (uren)")
 
 
 X = df_laadpaal[['ChargeTime', 'TotalEnergy']]
@@ -251,9 +251,7 @@ elif st.sidebar.button('Laadpaal', key = "10"):
         st.markdown('**Dashboard for the Charging stations**')      
         st.markdown('Hier gaan we diepgaand analyseren hoe de laadpaal data eruit ziet en hoe munipulaties worden uitgevoerd om conclusies te maken. Ook word er visueel aangetond hoe statistische variabelen relatie hebben met elkaar.')
        
-      ###############tekst voor charts
-       # st.markdown('
-     ###############   
+
                     
         st.plotly_chart(fig1)
         st.plotly_chart(fig3)
