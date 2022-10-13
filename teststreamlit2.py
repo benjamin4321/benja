@@ -72,7 +72,7 @@ df_laadpaal.drop(["2018-12-31 19:34:55", "2018-12-31 18:29:44", "2018-12-31 16:2
 
 duplicateRows = df_laadpaal[df_laadpaal.duplicated()]
 
-z = np.abs(stats.zscore(df_laadpaal['ConnectedTime']))
+#z = np.abs(stats.zscore(df_laadpaal['ConnectedTime']))
 
 threshold = 3
 
