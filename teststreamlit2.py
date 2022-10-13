@@ -196,10 +196,10 @@ df_voertuigen_gewicht = df_voertuigen
 
 df_voertuigen_gewicht.drop(df_voertuigen_gewicht[df_voertuigen_gewicht.Massa_rijklaar > 5000].index, inplace=True)
 
-fig24 = px.histogram(df_voertuigen_gewicht, x="Massa_rijklaar", color = 'Voertuigsoort', nbins = 20, marginal = "box")
+#fig24 = px.histogram(df_voertuigen_gewicht, x="Massa_rijklaar", color = 'Voertuigsoort', nbins = 20, marginal = "box")
 
 
-fig24.update_layout(title="Aantal voertuigen per gewicht", xaxis_title="Gewicht (kg)", yaxis_title="Aantal")
+#fig24.update_layout(title="Aantal voertuigen per gewicht", xaxis_title="Gewicht (kg)", yaxis_title="Aantal")
 
 
 ####Code Laadpalen#### FLOOR Laadpalen #############################################################################################
