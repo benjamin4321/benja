@@ -24,7 +24,77 @@ locatie1 = requests.get('https://api.openchargemap.io/v3/poi?key=123?output=json
 locatie2 = locatie1.json()
 df_locatie = pd.DataFrame(locatie2)
 
+addressinfo = df_locatie1['AddressInfo']
+addressinfo.loc[0]
+lijst = []
 
+for x in addressinfo:
+    inhoud = [x['ID'],x['StateOrProvince'], x['Title'], x['Longitude'], x['Latitude']]
+    lijst.append(inhoud)
+    
+df_locatie = pd.DataFrame(lijst, columns = ['ID','Provincie','Straat','LNG','LAT'])
+
+df_locatie['geometrie'] = df_locatie.apply(lambda x: Point(float(x.LNG), float(x.LAT)), axis = 1)
+df_locatie_crs = {'init':'epsg:3857'}
+df_locatie_geo = gpd.GeoDataFrame(df_locatie, crs = df_locatie_crs, geometry = df_locatie.geometrie)
+
+
+df_locatie.isna().sum()
+
+df_locatie = df_locatie.fillna('Nederland')
+
+df_locatie.isna().sum()
+
+df_locatie['Provincie'].unique()
+
+provincies = ['Nederland', 'Noord Holland','Zuid Holland','Zeeland','Noord Brabant','Utrecht','Flevoland','Friesland','Groningen','Drenthe','Overijssel','Gelderland','Limburg']
+
+#String similarity
+for i in range(len(provincies)):
+    # Elke Provincie in elke rij moet worden vergeleken met de lijst Provincies bovenstaand en daar een ratio aan geven:
+    df_locatie[provincies[i]] = df_locatie.apply(lambda x: fuzz.ratio(x['Provincie'], provincies[i]), axis=1)
+    
+for i in range(len(provincies)):
+    #Produceren van een kolom  waarbij de ID van de grootste waarde in de kolom wordt geplaatst
+    df_locatie['Provincie'] = df_locatie[['Nederland','Noord Holland','Zuid Holland','Zeeland','Noord Brabant','Utrecht','Flevoland','Friesland','Groningen','Drenthe','Overijssel','Gelderland','Limburg']].idxmax(axis =1)
+     
+df_locatie1 = df_locatie['Provincie'].value_counts().sort_values(ascending = False)
+
+fig11 = px.scatter_mapbox(df_locatie,
+    lon = df_locatie_geo['LNG'], lat = df_locatie_geo['LAT'], color = df_locatie.Provincie,
+                        mapbox_style = 'open-street-map', animation_group = 'Provincie', width = 2300, height = 2000, zoom = 7.5,
+                        marker = dict(line_color='white', line_width=0.5)
+                        
+        
+)
+dropdown_buttons = [  {'label': "Alle Provincies", 'method': "update",
+                       'args': [{"visible": [True, True, True, True, True, True,True, True, True, True, True, True, True, True]},
+                                {'title': 'Alle Provincies'}]},
+                    {'label': 'Noord Holland', 'method': 'update','args': [{'visible': [True, False, False, False, False, False, False, False, False, False, False, False, False]}, {'title': 'Noord Holland'}]},
+                   {'label': 'Utrecht', 'method': 'update','args': [{'visible': [False, True, False, False, False, False, False, False, False, False, False, False, False]}, {'title': 'Utrecht'}]},  
+                    {'label': 'Zuid Holland', 'method': 'update','args': [{'visible': [False, False, True, False, False, False, False, False, False, False, False, False, False]}, {'title': 'Zuid Holland'}]},  
+                    {'label': "Groningen", 'method': "update",'args': [{"visible": [False, False, False, True, False, False, False, False, False, False, False, False, False]}, {'title': 'Groningen'}]},
+                   {'label': 'Nederland', 'method': 'update','args': [{'visible': [False, False, False, False, True, False, False, False, False, False, False, False, False]}, {'title': 'Nederland'}]},
+                   {'label': "Zeeland", 'method': "update",'args': [{"visible": [False, False, False, False, False, True, False, False, False, False, False, False, False]}, {'title': 'Zeeland'}]},
+                    {'label': "Limburg", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, True, False, False, False, False, False, False]}, {'title': 'Limburg'}]},
+                    {'label': "Noord Brabant", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, True, False, False, False, False, False]}, {'title': 'Noord Brabant'}]},
+                    {'label': "Gelderland", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, False, True, False, False, False, False]}, {'title': 'Gelderland'}]},
+                    {'label': "Flevoland", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, False, False, True, False, False, False]}, {'title': 'Flevoland'}]},
+                    {'label': "Drenthe", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, False, False, False, True, False, False]}, {'title': 'Drenthe'}]},
+                    {'label': "Overijssel", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, False, False, False, False, True, False]}, {'title': 'Overijssel'}]},
+                    {'label': "Friesland", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, False, False, False, False, False, True]}, {'title': 'Friesland'}]},
+                   ]
+fig11.update_layout(
+        title = 'Laadpalen in Nederland per Provincie',
+        showlegend = True)
+
+lat_foc = 52.09061
+lng_foc = 5.12143
+fig.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.6,'y': 1.0,'showactive': True,'active': 0,'buttons': dropdown_buttons}]},
+    geo = dict(
+    projection_scale = 11,
+    center = dict(lat = lat_foc, lon=lng_foc)
+    ))
 #dataframe codes MAXIM Voertuigen
 #df_laadpaal = pd.read_csv("laadpaaldata.csv")
 #df_laadpaal["TotalEnergy"] = df_laadpaal["TotalEnergy"] / 1000
@@ -241,7 +311,9 @@ elif st.sidebar.button('Voertuigen', key = "6"):
         st.sidebar.button('Return',key = "7")
 #elif st.sidebar.button('Deaths', key = "8"):
 elif st.sidebar.button('Locaties', key = "8"):
-        st.header('Gemeentes & provincies')
+        st.header('Provincies')
+    st.markdown('Laadpalen in totaal gelegen in Nederland en bijbehorende provincie.
+    st.plotly_chart(fig11)
     #st.header('Total Deaths')
     #st.markdown('**Welcome to the Covid19 dashboard of total deaths**') 
     #st.markdown('**Dashboard for the different provinces**') 
