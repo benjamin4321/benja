@@ -19,6 +19,7 @@ import missingno as msno
 import statsmodels.api as sm
 #!pip install streamlit
 import streamlit as st
+from fuzzywuzzy import fuzz
 
 #Dataframe Roy Locaties
 locatie1 = requests.get('https://api.openchargemap.io/v3/poi?key=123?output=json&countrycode=NL&maxresults=20000')
