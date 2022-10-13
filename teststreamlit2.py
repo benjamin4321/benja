@@ -92,7 +92,7 @@ fig11.update_layout(
 
 lat_foc = 52.09061
 lng_foc = 5.12143
-fig.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.6,'y': 1.0,'showactive': True,'active': 0,'buttons': dropdown_buttons}]},
+fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.6,'y': 1.0,'showactive': True,'active': 0,'buttons': dropdown_buttons}]},
     geo = dict(
     projection_scale = 11,
     center = dict(lat = lat_foc, lon=lng_foc)
