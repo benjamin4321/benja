@@ -378,6 +378,16 @@ elif st.sidebar.button('Locaties', key = "8"):
     
     
     st.header('Provincies')
+    
+    st.plotly_chart(fig21)
+    
+    st.plotly_chart(fig22)
+    
+    st.plotly_chart(fig23)
+    
+    st.plotly_chart(fig24)
+    
+    
     st.markdown('Laadpalen in totaal gelegen in Nederland en bijbehorende provincie.')
     
 
