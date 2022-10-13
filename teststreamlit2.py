@@ -252,7 +252,7 @@ elif st.sidebar.button('Laadpaal', key = "10"):
         st.markdown('Hier gaan we diepgaand analyseren hoe de laadpaal data eruit ziet en hoe munipulaties worden uitgevoerd om conclusies te maken. Ook word er visueel aangetond hoe statistische variabelen relatie hebben met elkaar.')
        
       ###############tekst voor charts
-        st.markdown('
+       # st.markdown('
      ###############   
                     
         st.plotly_chart(fig1)
