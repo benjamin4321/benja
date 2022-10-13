@@ -239,14 +239,14 @@ elif st.sidebar.button('Locaties', key = "8"):
     #st.plotly_chart(fig5)
     #st.plotly_chart(fig6)
         st.sidebar.button('Return',key = "9")
-#elif st.sidebar.button('Vaccinations', key = "10"):
+
 elif st.sidebar.button('Laadpaal', key = "10"):
         st.header('Charging stations')
         st.markdown('**Dashboard for the Charging stations**')      
         st.markdown('Hier gaan we diepgaand analyseren hoe de laadpaal data eruit ziet en hoe munipulaties worden uitgevoerd om conclusies te maken. Ook word er visueel aangetond hoe statistische variabelen relatie hebben met elkaar.')
         st.markdown('De tijd van aansluiten met betrekkeing tot de oplaadtijd en de paalkleeftijd.')
         st.plotly_chart(fig6)
-        st.markdown('Lineair regression Model, aangetoont de bijbehorende data voor de correlerende variablen van de laadpaal data
+        st.markdown('Lineair regression Model, aangetoont de bijbehorende data voor de correlerende variablen van de laadpaal data.')
         st.write(print_model)
         st.plotly_chart(fig6)
     #st.plotly_chart(fig2)
