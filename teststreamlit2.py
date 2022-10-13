@@ -10,6 +10,7 @@ import numpy as np
 import requests
 #import json
 import plotly.express as px
+import plotly.figure_factory as ff
 from shapely.geometry import Point
 #!pip install missingno
 import missingno as msno
@@ -24,43 +25,146 @@ import streamlit as st
 #df_laadpaal = df_laadpaal.drop(df_laadpaal[df_laadpaal.ChargeTime < 0].index)
 #df_locatie = requests.get('https://api.openchargemap.io/v3/poi?key=123?output=json&countrycode=NL')
 #df_locatie.json()
-URL3 = requests.get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=j9OjMxvLi7CazM7CK2fssR5D5&$where=Datum_eerste_toelating>20180101&$select=Kenteken,Voertuigsoort,Merk,Handelsbenaming,Massa_rijklaar,Datum_eerste_toelating&$limit=1000000")
-z = URL3.json()
-df_kenteken = pd.DataFrame(z)
-URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=14200000")
-a = URL4.json()
-df_brandstof = pd.DataFrame(a)
-df_brandstof
-df_voertuigen = df_kenteken.merge(df_brandstof, on = "Kenteken", how = "inner")
-df_voertuigen
-df_voertuigen_na = df_voertuigen[df_voertuigen["Massa_rijklaar"].isna()]
-df_voertuigen_na
-df_voertuigen = df_voertuigen.dropna()
-df_voertuigen['Massa_rijklaar'] = df_voertuigen['Massa_rijklaar'].astype('int')
-duplicates = df_voertuigen["Kenteken"].duplicated()
-print(duplicates)
-df_voertuigen[duplicates]
+#URL3 = requests.get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=j9OjMxvLi7CazM7CK2fssR5D5&$where=Datum_eerste_toelating>20180101&$select=Kenteken,Voertuigsoort,Merk,Handelsbenaming,Massa_rijklaar,Datum_eerste_toelating&$limit=1000000")
+#z = URL3.json()
+#df_kenteken = pd.DataFrame(z)
+#URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=14200000")
+#a = URL4.json()
+#df_brandstof = pd.DataFrame(a)
+#df_brandstof
+#df_voertuigen = df_kenteken.merge(df_brandstof, on = "Kenteken", how = "inner")
+#df_voertuigen
+#df_voertuigen_na = df_voertuigen[df_voertuigen["Massa_rijklaar"].isna()]
+#df_voertuigen_na
+#df_voertuigen = df_voertuigen.dropna()
+#df_voertuigen['Massa_rijklaar'] = df_voertuigen['Massa_rijklaar'].astype('int')
+#duplicates = df_voertuigen["Kenteken"].duplicated()
+#print(duplicates)
+#df_voertuigen[duplicates]
 
-uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
-print(uitschieter)
+#uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
+#print(uitschieter)
 
-df_voertuigen.drop(df_voertuigen[df_voertuigen.Massa_rijklaar > 20000].index, inplace=True)
-df_voertuigen.drop_duplicates(subset="Kenteken", keep = "first", inplace = True)
+#df_voertuigen.drop(df_voertuigen[df_voertuigen.Massa_rijklaar > 20000].index, inplace=True)
+#df_voertuigen.drop_duplicates(subset="Kenteken", keep = "first", inplace = True)
 
 #geen spel fouten
-merk_handel = df_voertuigen['Merk'].value_counts().sort_values(ascending = False)
-merk_handel.head(70)
+#merk_handel = df_voertuigen['Merk'].value_counts().sort_values(ascending = False)
+#merk_handel.head(70)
 
 
-df_voertuigen["Datum_eerste_toelating"] = pd.to_datetime(df_voertuigen['Datum_eerste_toelating'], format='%Y%m%d')
-df_voertuigen.head()
+#df_voertuigen["Datum_eerste_toelating"] = pd.to_datetime(df_voertuigen['Datum_eerste_toelating'], format='%Y%m%d')
+#df_voertuigen.head()
 
-df_voertuigen_aantal = df_voertuigen.groupby(["Datum_eerste_toelating", "Brandstof_omschrijving"])['Kenteken'].count().reset_index(name='aantal')
-df_voertuigen_aantal
+#df_voertuigen_aantal = df_voertuigen.groupby(["Datum_eerste_toelating", "Brandstof_omschrijving"])['Kenteken'].count().reset_index(name='aantal')
+#df_voertuigen_aantal
 
-df_voertuigen_aantal['month_year'] = pd.to_datetime(df_voertuigen_aantal['Datum_eerste_toelating']).dt.to_period('M')
-df_voertuigen_aantal
+#df_voertuigen_aantal['month_year'] = pd.to_datetime(df_voertuigen_aantal['Datum_eerste_toelating']).dt.to_period('M')
+#df_voertuigen_aantal
+####Code Laadpalen####
+df_laadpaal = pd.read_csv("laadpaaldata.csv", index_col = "Started")
 
+df_laadpaal["TotalEnergy"] = df_laadpaal["TotalEnergy"] / 1000
+df_laadpaal["MaxPower"] = df_laadpaal["MaxPower"] / 1000
+
+df_laadpaal.drop(["2018-12-31 19:34:55", "2018-12-31 18:29:44", "2018-12-31 16:25:27", "2018-12-31 15:33:42", 
+                  "2018-12-31 02:48:50", "2018-02-28 20:46:00", "2018-02-29 07:37:53"], inplace = True)
+
+duplicateRows = df_laadpaal[df_laadpaal.duplicated()]
+
+z = np.abs(stats.zscore(df_laadpaal['ConnectedTime']))
+
+threshold = 3
+
+for x in ['ConnectedTime']:
+    q75,q25 = np.percentile(df_laadpaal.loc[:,x],[75,25])
+    intr_qr = q75-q25
+ 
+    max = q75+(1.5*intr_qr)
+    min = q25-(1.5*intr_qr)
+ 
+    df_laadpaal.loc[df_laadpaal[x] < min,x] = np.nan
+    df_laadpaal.loc[df_laadpaal[x] > max,x] = np.nan
+    
+df_laadpaal = df_laadpaal.dropna(axis = 0)
+    
+    
+for x in ['TotalEnergy']:
+    q75,q25 = np.percentile(df_laadpaal.loc[:,x],[75,25])
+    intr_qr = q75-q25
+ 
+    max = q75+(1.5*intr_qr)
+    min = q25-(1.5*intr_qr)
+ 
+    df_laadpaal.loc[df_laadpaal[x] < min,x] = np.nan
+    df_laadpaal.loc[df_laadpaal[x] > max,x] = np.nan
+    
+ df_laadpaal = df_laadpaal.dropna(axis = 0)
+
+for x in ['ChargeTime']:
+    q75,q25 = np.percentile(df_laadpaal.loc[:,x],[75,25])
+    intr_qr = q75-q25
+ 
+    max = q75+(1.5*intr_qr)
+    min = q25-(1.5*intr_qr)
+ 
+    df_laadpaal.loc[df_laadpaal[x] < min,x] = np.nan
+    df_laadpaal.loc[df_laadpaal[x] > max,x] = np.nan
+    
+    
+df_laadpaal = df_laadpaal.dropna(axis = 0)
+
+for x in ['MaxPower']:
+    q75,q25 = np.percentile(df_laadpaal.loc[:,x],[75,25])
+    intr_qr = q75-q25
+ 
+    max = q75+(1.5*intr_qr)
+    min = q25-(1.5*intr_qr)
+ 
+    df_laadpaal.loc[df_laadpaal[x] < min,x] = np.nan
+    df_laadpaal.loc[df_laadpaal[x] > max,x] = np.nan
+    
+df_laadpaal = df_laadpaal.dropna(axis = 0)
+df_laadpaal["Paalkleeftijd"] = df_laadpaal["ConnectedTime"] - df_laadpaal["ChargeTime"]
+
+df_laadpaal.boxplot(column='MaxPower')
+mnso.matrix(df_laadpaal)
+
+### totaal verbruikte energie
+fig1 = px.histogram(df_laadpaal, x="TotalEnergy")
+fig1.update_layout(title="Totaal verbruikte energie", xaxis_title="Totale energie (Wh)", yaxis_title="Aantal")
+##ConnectedTime
+fig2 = px.histogram(df_laadpaal, x="ConnectedTime")
+fig2.update_layout(title="Tijd aangesloten aan laadpaal", xaxis_title="Uren", yaxis_title="Aantal")
+
+fig3 = px.histogram(df_laadpaal, x="ChargeTime")
+fig3.update_layout(title="Tijd echt aan het laden", xaxis_title="Uren", yaxis_title="Aantal")
+
+fig4 = px.histogram(df_laadpaal, x="ChargeTime", marginal="box")
+fig4.update_layout(title="Tjid werkelijk aan het laden aan laadpaal", xaxis_title="Uren", yaxis_title="Aantal")
+
+fig5 = px.histogram(df_laadpaal, x="MaxPower")
+fig5.update_layout(title="Maximaal gevraagd vermogen", xaxis_title="Vermogen (W)",
+                  yaxis_title="Aantal")
+
+hist_data = [df_laadpaal["ChargeTime"], df_laadpaal["ConnectedTime"], df_laadpaal["Paalkleeftijd"]]
+group_labels = ['Oplaadtijd', 'Tijd aangesloten ', 'Paalkleeftijd']
+
+fig6 = ff.create_distplot(hist_data, group_labels)
+fig6.update_layout(title="Kansdichtheidfunctie oplaadtijd, tijd aangesloten en paalkleeftijd", 
+                  xaxis_title="Uren", yaxis_title="Kans")
+##
+fig7 = px.histogram(df_laadpaal, x="ChargeTime", marginal="box")
+fig7.update_layout(title="Tjid werkelijk aan het laden aan laadpaal", xaxis_title="Uren", yaxis_title="Aantal")
+#MaxPower HISt
+fig8 = px.histogram(df_laadpaal, x="MaxPower")
+fig8.update_layout(title="Maximaal gevraagd vermogen", xaxis_title="Vermogen (W)",
+                  yaxis_title="Aantal")
+##Scatter
+fig9 = px.scatter(df_laadpaal, x="ChargeTime", y="ConnectedTime")
+fig9.update_layout(title="Tijd verbonden aan laadpaal in verband met werkelijk aan het laden", 
+                  xaxis_title="Tijd aan het laden (uren)",
+                  yaxis_title="Tijd verbonden (uren)")
 
 
 ##Dashboard Codes
