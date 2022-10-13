@@ -250,7 +250,7 @@ elif st.sidebar.button('Laadpaal', key = "10"):
         st.write(print_model)
         
         st.markdown('De Scatterplot met bijbehorende plotlijn.')
-        st.plotly_chart(fig10)
+        st.plotly_chart(fig9)
   
    
         st.sidebar.button('Return',key = "11")
@@ -260,12 +260,7 @@ elif st.sidebar.button('Statistic explanations',key = "12"):
     #st.markdown('Here you can find some visualizations of recovering form covid19 around the world, per region, per country and per 100.000 inhabitants')
     #st.plotly_chart(fig7)
         st.sidebar.button('Return', key = "13")
-#elif st.sidebar.button('Manufactures',key = "14"):
-    #st.header('Total Manufacturers')
-    #st.markdown('**Welcome to the Covid19 dashboard of manufacturers**') 
-    #st.markdown('Here you can find some visualizations of manufacturers around the world, per region, per country and per 100.000 inhabitants')
-    #st.plotly_chart(fig8)
-    #st.sidebar.button('Home', key = "15")
+
 else :
     st.header('Home')
     #st.markdown('**Welcome to the Covid19 dashboard**')
