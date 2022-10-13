@@ -11,4 +11,3 @@ seaborn==0.12.0
 scipy==1.9.1
 Shapely==1.8.4
 matplotlib==3.6.0
-simplejson==3.17.6
