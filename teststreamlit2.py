@@ -100,40 +100,40 @@ fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 0.75,'show
 #dataframe codes MAXIM Voertuigen######################################################################################################
 
 URL3 = requests.get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=j9OjMxvLi7CazM7CK2fssR5D5&$where=Datum_eerste_toelating>20180101&$select=Kenteken,Voertuigsoort,Merk,Handelsbenaming,Massa_rijklaar,Datum_eerste_toelating&$limit=1000000")
-z = URL3.json()
-df_kenteken = pd.DataFrame(z)
-URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=14200000")
-a = URL4.json()
-df_brandstof = pd.DataFrame(a)
+#z = URL3.json()
+#df_kenteken = pd.DataFrame(z)
+#URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=14200000")
+#a = URL4.json()
+#df_brandstof = pd.DataFrame(a)
 #df_brandstof
-df_voertuigen = df_kenteken.merge(df_brandstof, on = "Kenteken", how = "inner")
+#df_voertuigen = df_kenteken.merge(df_brandstof, on = "Kenteken", how = "inner")
 #df_voertuigen
-df_voertuigen_na = df_voertuigen[df_voertuigen["Massa_rijklaar"].isna()]
+#df_voertuigen_na = df_voertuigen[df_voertuigen["Massa_rijklaar"].isna()]
 #df_voertuigen_na
-df_voertuigen = df_voertuigen.dropna()
-df_voertuigen['Massa_rijklaar'] = df_voertuigen['Massa_rijklaar'].astype('int')
-duplicates = df_voertuigen["Kenteken"].duplicated()
+#df_voertuigen = df_voertuigen.dropna()
+#df_voertuigen['Massa_rijklaar'] = df_voertuigen['Massa_rijklaar'].astype('int')
+#duplicates = df_voertuigen["Kenteken"].duplicated()
 #print(duplicates)
-df_voertuigen[duplicates]
+#df_voertuigen[duplicates]
 
-uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
+#uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
 #print(uitschieter)
 
-df_voertuigen.drop(df_voertuigen[df_voertuigen.Massa_rijklaar > 20000].index, inplace=True)
-df_voertuigen.drop_duplicates(subset="Kenteken", keep = "first", inplace = True)
+#df_voertuigen.drop(df_voertuigen[df_voertuigen.Massa_rijklaar > 20000].index, inplace=True)
+#df_voertuigen.drop_duplicates(subset="Kenteken", keep = "first", inplace = True)
 
 #geen spel fouten
-merk_handel = df_voertuigen['Merk'].value_counts().sort_values(ascending = False)
-merk_handel.head(70)
+#merk_handel = df_voertuigen['Merk'].value_counts().sort_values(ascending = False)
+#merk_handel.head(70)
 
-
-df_voertuigen["Datum_eerste_toelating"] = pd.to_datetime(df_voertuigen['Datum_eerste_toelating'], format='%Y%m%d')
+#
+#df_voertuigen["Datum_eerste_toelating"] = pd.to_datetime(df_voertuigen['Datum_eerste_toelating'], format='%Y%m%d')
 #df_voertuigen.head()
 
-df_voertuigen_aantal = df_voertuigen.groupby(["Datum_eerste_toelating", "Brandstof_omschrijving"])['Kenteken'].count().reset_index(name='aantal')
+#df_voertuigen_aantal = df_voertuigen.groupby(["Datum_eerste_toelating", "Brandstof_omschrijving"])['Kenteken'].count().reset_index(name='aantal')
 #df_voertuigen_aantal
 
-df_voertuigen_aantal['month_year'] = pd.to_datetime(df_voertuigen_aantal['Datum_eerste_toelating']).dt.to_period('M')
+#df_voertuigen_aantal['month_year'] = pd.to_datetime(df_voertuigen_aantal['Datum_eerste_toelating']).dt.to_period('M')
 #df_voertuigen_aantal
 ####Code Laadpalen#### FLOOR Laadpalen #############################################################################################
 df_laadpaal = pd.read_csv("laadpaaldata.csv", index_col = "Started")
@@ -146,7 +146,7 @@ df_laadpaal.drop(["2018-12-31 19:34:55", "2018-12-31 18:29:44", "2018-12-31 16:2
 
 duplicateRows = df_laadpaal[df_laadpaal.duplicated()]
 
-#z = np.abs(stats.zscore(df_laadpaal['ConnectedTime']))
+z = np.abs(stats.zscore(df_laadpaal['ConnectedTime']))
 
 threshold = 3
 
