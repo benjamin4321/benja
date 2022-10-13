@@ -99,7 +99,7 @@ for x in ['TotalEnergy']:
     df_laadpaal.loc[df_laadpaal[x] < min,x] = np.nan
     df_laadpaal.loc[df_laadpaal[x] > max,x] = np.nan
     
- df_laadpaal = df_laadpaal.dropna(axis = 0)
+df_laadpaal = df_laadpaal.dropna(axis = 0)
 
 for x in ['ChargeTime']:
     q75,q25 = np.percentile(df_laadpaal.loc[:,x],[75,25])
