@@ -312,7 +312,7 @@ elif st.sidebar.button('Voertuigen', key = "6"):
 #elif st.sidebar.button('Deaths', key = "8"):
 elif st.sidebar.button('Locaties', key = "8"):
         st.header('Provincies')
-    st.markdown('Laadpalen in totaal gelegen in Nederland en bijbehorende provincie.
+    st.markdown('Laadpalen in totaal gelegen in Nederland en bijbehorende provincie.')
     st.plotly_chart(fig11)
     #st.header('Total Deaths')
     #st.markdown('**Welcome to the Covid19 dashboard of total deaths**') 
