@@ -103,14 +103,10 @@ fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 0.75,'show
     ))
 #dataframe codes MAXIM Voertuigen######################################################################################################
 
-URL3 = requests.get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=j9OjMxvLi7CazM7CK2fssR5D5&$where=Datum_eerste_toelating>20180101&$select=Kenteken,Voertuigsoort,Merk,Handelsbenaming,Massa_rijklaar,Datum_eerste_toelating&$limit=750000")
-z = URL3.json()
-df_kenteken = pd.DataFrame(z)
-URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=2500000")
-a = URL4.json()
-df_brandstof = pd.DataFrame(a)
-#df_brandstof
-df_voertuigen = df_kenteken.merge(df_brandstof, on = "Kenteken", how = "inner")
+
+
+
+
 #df_voertuigen
 df_voertuigen_na = df_voertuigen[df_voertuigen["Massa_rijklaar"].isna()]
 #df_voertuigen_na
@@ -367,21 +363,30 @@ if st.sidebar.button('Home',key = "1"):
     st.sidebar.button('Charging stations ',key = "4")
     st.sidebar.button('Statistic explanations',key = "5")
 #elif st.sidebar.button('Cases', key = "6"):
+#####################################################Voertuigen
 elif st.sidebar.button('Voertuigen', key = "6"):
         st.header('Voertuigen')
         st.markdown('**Dashboard Elektrische Voertuigen**') 
-        st.plotly_chart(fig21)
-        st.plotly_chart(fig22)
-        st.plotly_chart(fig23)
+        
+        
+        st.markdown('Hier worden visualisaties gemaakt over desbetreffend autos, die dan tegenover de verkoop permaand worden gezet.')
+        #st.plotly_chart(fig21)
+        
+        
+        st.markdown('Pie chart in percentages. waarbij de auto per brandstof in het totaal worden gevisualiseerd.')
+        #st.plotly_chart(fig22)
+        
+        
+        st.markdown('Aantal autos die verkocht worden per maand gesorteerd op type auto. Aantal voertuigen tegenover het gewicht.')
+        #st.plotly_chart(fig23)
+        
+        
         #st.plotly_chart(fig24)
     
         
-        st.markdown('Hier worden visualisaties gemaakt over desbetreffend autos, die dan tegenover de verkoop permaand worden gezet.') 
-        st.markdown('Pie chart in percentages. waarbij de auto per brandstof in het totaal worden gevisualiseerd.')
-        st.markdown('Aantal autos die verkocht worden per maand gesorteerd op type auto. Aantal voertuigen tegenover het gewicht.')
-        st.markdown('Hier Data en visuele data voor de EVs in Nederland.')
-    #st.plotly_chart(fig3)
-    #st.plotly_chart(fig4)
+        
+
+
         st.sidebar.button('Return',key = "7")
 #elif st.sidebar.button('Deaths', key = "8"):
 elif st.sidebar.button('Locaties', key = "8"):
