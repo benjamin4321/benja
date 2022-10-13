@@ -187,12 +187,12 @@ print_model = model.summary()
 
 #prediction_data = explanotory_data.assign(ConnectedTime=mdl_con_vs_char.predict(explanotory_data))
 
-#fig10 = plt.figure()
-#sns.regplot(x="ChargeTime", y="ConnectedTime", ci=None, data=df_laadpaal)
-#sns.scatterplot(x="ChargeTime", y="ConnectedTime", data=prediction_data, color="red", marker="s")
-#plt.xlabel("Tijd aan het laden (uren)")
-#plt.ylabel("Tijd aan laadpaal (uren)")
-#plt.title("Voorspelling tijd verbonden aan laadpaal in verband met werkelijk aan het laden")
+fig10 = plt.figure()
+sns.regplot(x="ChargeTime", y="ConnectedTime", ci=None, data=df_laadpaal)
+sns.scatterplot(x="ChargeTime", y="ConnectedTime", data=prediction_data, color="red", marker="s")
+plt.xlabel("Tijd aan het laden (uren)")
+plt.ylabel("Tijd aan laadpaal (uren)")
+plt.title("Voorspelling tijd verbonden aan laadpaal in verband met werkelijk aan het laden")
 
 
 #little_laadpaal = pd.DataFrame({"ChargeTime": [8]})
@@ -248,8 +248,11 @@ elif st.sidebar.button('Laadpaal', key = "10"):
         st.plotly_chart(fig6)
         st.markdown('Lineair regression Model, aangetoont de bijbehorende data voor de correlerende variablen van de laadpaal data.')
         st.write(print_model)
-        st.plotly_chart(fig6)
-    #st.plotly_chart(fig2)
+        
+        st.markdown('De Scatterplot met bijbehorende plotlijn.')
+        st.plotly_chart(fig10)
+  
+   
         st.sidebar.button('Return',key = "11")
 elif st.sidebar.button('Statistic explanations',key = "12"):
     #st.header('Total Recovered')
