@@ -124,7 +124,7 @@ df_voertuigen.drop(df_voertuigen[df_voertuigen.Massa_rijklaar > 20000].index, in
 
 #geen spel fouten
 merk_handel = df_voertuigen['Merk'].value_counts().sort_values(ascending = False)
-merk_handel.head(70)
+#merk_handel.head(70)
 
 #
 df_voertuigen["Datum_eerste_toelating"] = pd.to_datetime(df_voertuigen['Datum_eerste_toelating'], format='%Y%m%d')
@@ -167,7 +167,7 @@ fig22 = px.pie(df_voertuigen_aantal2, values='som', names='Brandstof_omschrijvin
 df_voertuigen_soort_aantal = df_voertuigen.groupby(
     ["Voertuigsoort", "Brandstof_omschrijving"]
 )['Kenteken'].count().reset_index(name='aantal')
-df_voertuigen_soort_aantal
+#df_voertuigen_soort_aantal
 
 fig23 = px.bar(df_voertuigen_soort_aantal, x='Voertuigsoort', y='aantal', color = "Brandstof_omschrijving", title = 'Aantal autos verkocht per maand',
             category_orders={"Brandstof_omschrijving": ["Alcohol", "Benzine", "CNG", "Diesel", "Elektriciteit", "LNG", "LPG", "Waterstof"]})
@@ -196,7 +196,7 @@ df_voertuigen_gewicht = df_voertuigen
 
 df_voertuigen_gewicht.drop(df_voertuigen_gewicht[df_voertuigen_gewicht.Massa_rijklaar > 5000].index, inplace=True)
 
-fig = px.histogram(df_voertuigen_gewicht, x="Massa_rijklaar", color = 'Voertuigsoort', nbins = 20, marginal = "box")
+fig24 = px.histogram(df_voertuigen_gewicht, x="Massa_rijklaar", color = 'Voertuigsoort', nbins = 20, marginal = "box")
 
 
 fig.update_layout(title="Aantal voertuigen per gewicht", xaxis_title="Gewicht (kg)", yaxis_title="Aantal")
