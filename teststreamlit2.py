@@ -370,6 +370,12 @@ if st.sidebar.button('Home',key = "1"):
 elif st.sidebar.button('Voertuigen', key = "6"):
         st.header('Voertuigen')
         st.markdown('**Dashboard Elektrische Voertuigen**') 
+        st.plotly_chart(fig21)
+        st.plotly_chart(fig22)
+        st.plotly_chart(fig23)
+        #st.plotly_chart(fig24)
+    
+        
         st.markdown('Hier worden visualisaties gemaakt over desbetreffend autos, die dan tegenover de verkoop permaand worden gezet.') 
         st.markdown('Pie chart in percentages. waarbij de auto per brandstof in het totaal worden gevisualiseerd.')
         st.markdown('Aantal autos die verkocht worden per maand gesorteerd op type auto. Aantal voertuigen tegenover het gewicht.')
@@ -383,14 +389,7 @@ elif st.sidebar.button('Locaties', key = "8"):
     
     st.header('Provincies')
     
-    st.plotly_chart(fig21)
-    
-    st.plotly_chart(fig22)
-    
-    st.plotly_chart(fig23)
-    
-    st.plotly_chart(fig24)
-    
+
     
     st.markdown('Laadpalen in totaal gelegen in Nederland en bijbehorende provincie.')
     
