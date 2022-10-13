@@ -165,7 +165,7 @@ fig8.update_layout(title="Maximaal gevraagd vermogen", xaxis_title="Vermogen (W)
 ##Scatter
 fig9 = px.scatter(df_laadpaal, x="ChargeTime", y="ConnectedTime")
 fig9.update_layout(title="Tijd verbonden aan laadpaal in verband met werkelijk aan het laden", 
-                  xaxis_title="Tijd aan het laden (uren)",
+                  xaxis_title="Tijd aan het laden (uren)", trendline = "ols",
                   yaxis_title="Tijd verbonden (uren)")
 
 
@@ -187,12 +187,12 @@ print_model = model.summary()
 
 #prediction_data = explanotory_data.assign(ConnectedTime=mdl_con_vs_char.predict(explanotory_data))
 
-fig10 = plt.figure()
-sns.regplot(x="ChargeTime", y="ConnectedTime", ci=None, data=df_laadpaal)
-sns.scatterplot(x="ChargeTime", y="ConnectedTime", data=prediction_data, color="red", marker="s")
-plt.xlabel("Tijd aan het laden (uren)")
-plt.ylabel("Tijd aan laadpaal (uren)")
-plt.title("Voorspelling tijd verbonden aan laadpaal in verband met werkelijk aan het laden")
+#fig10 = plt.figure()
+#sns.regplot(x="ChargeTime", y="ConnectedTime", ci=None, data=df_laadpaal)
+#sns.scatterplot(x="ChargeTime", y="ConnectedTime", data=prediction_data, color="red", marker="s")
+#plt.xlabel("Tijd aan het laden (uren)")
+#plt.ylabel("Tijd aan laadpaal (uren)")
+#plt.title("Voorspelling tijd verbonden aan laadpaal in verband met werkelijk aan het laden")
 
 
 #little_laadpaal = pd.DataFrame({"ChargeTime": [8]})
@@ -201,6 +201,12 @@ plt.title("Voorspelling tijd verbonden aan laadpaal in verband met werkelijk aan
 
 
 ##Dashboard Codes
+
+
+
+###############tekst voor charts
+#st.markdown('
+############### 
 st.sidebar.title('Menu')
 
 st.sidebar.backgroundColor = '#A9A9A9'
@@ -244,13 +250,26 @@ elif st.sidebar.button('Laadpaal', key = "10"):
         st.header('Charging stations')
         st.markdown('**Dashboard for the Charging stations**')      
         st.markdown('Hier gaan we diepgaand analyseren hoe de laadpaal data eruit ziet en hoe munipulaties worden uitgevoerd om conclusies te maken. Ook word er visueel aangetond hoe statistische variabelen relatie hebben met elkaar.')
+       
+      ###############tekst voor charts
+        st.markdown('
+     ###############   
+                    
+        st.plotly_chart(fig1)
+        st.plotly_chart(fig3)
+        
         st.markdown('De tijd van aansluiten met betrekkeing tot de oplaadtijd en de paalkleeftijd.')
         st.plotly_chart(fig6)
+ 
+
+        st.markdown('De Scatterplot met bijbehorende plotlijn.')
+        st.plotly_chart(fig9)
+        
         st.markdown('Lineair regression Model, aangetoont de bijbehorende data voor de correlerende variablen van de laadpaal data.')
         st.write(print_model)
         
-        st.markdown('De Scatterplot met bijbehorende plotlijn.')
-        st.plotly_chart(fig9)
+       
+
   
    
         st.sidebar.button('Return',key = "11")
