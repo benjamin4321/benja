@@ -150,15 +150,15 @@ fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 0.75,'show
    #           title='Aantal autos verkocht per maand')
 
 #dropdown_buttons = [  {'label': "Alles", 'method': "update",'args': [{"visible": [True, True, True, True, True, True, True, True]}, {'title': 'Aantal autos verkocht per maand'}]}, 
-                   {'label': 'Alcohol', 'method': 'update','args': [{'visible': [True, False, False, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},  
-                    {'label': 'Benzine', 'method': 'update','args': [{'visible': [False, True, False, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},  
-                    {'label': "CNG", 'method': "update",'args': [{"visible": [False, False, True, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
-                   {'label': 'Diesel', 'method': 'update','args': [{'visible': [False, False, False, True, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
-                   {'label': "Elektriciteit", 'method': "update",'args': [{"visible": [False, False, False, False, True, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
-                   {'label': "LNG", 'method': "update",'args': [{"visible": [False, False, False, False, False, True, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
-                    {'label': "LPG", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, True, False]}, {'title': 'Aantal autos verkocht per maand'}]},
-                    {'label': "Waterstof", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, True]}, {'title': 'Aantal autos verkocht per maand'}]}
-                  ]
+#                   {'label': 'Alcohol', 'method': 'update','args': [{'visible': [True, False, False, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},  
+   #                 {'label': 'Benzine', 'method': 'update','args': [{'visible': [False, True, False, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},  
+    #                {'label': "CNG", 'method': "update",'args': [{"visible": [False, False, True, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+      #             {'label': 'Diesel', 'method': 'update','args': [{'visible': [False, False, False, True, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+    #               {'label': "Elektriciteit", 'method': "update",'args': [{"visible": [False, False, False, False, True, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+       #            {'label': "LNG", 'method': "update",'args': [{"visible": [False, False, False, False, False, True, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+     #               {'label': "LPG", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, True, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+        #            {'label': "Waterstof", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, True]}, {'title': 'Aantal autos verkocht per maand'}]}
+           #       ]
 #fig21.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.2,'y': 0.5,'showactive': True,'active': 0,'buttons': dropdown_buttons}]})
 
 
