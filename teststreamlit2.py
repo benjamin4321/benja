@@ -116,7 +116,7 @@ df_voertuigen['Massa_rijklaar'] = df_voertuigen['Massa_rijklaar'].astype('int')
 #print(duplicates)
 #df_voertuigen[duplicates]
 
-uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
+#uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
 #print(uitschieter)
 
 df_voertuigen.drop(df_voertuigen[df_voertuigen.Massa_rijklaar > 20000].index, inplace=True)
