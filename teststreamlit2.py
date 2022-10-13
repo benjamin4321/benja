@@ -61,9 +61,13 @@ for i in range(len(provincies)):
     df_locatie['Provincie'] = df_locatie[['Nederland','Noord Holland','Zuid Holland','Zeeland','Noord Brabant','Utrecht','Flevoland','Friesland','Groningen','Drenthe','Overijssel','Gelderland','Limburg']].idxmax(axis =1)
      
 df_locatie1 = df_locatie['Provincie'].value_counts().sort_values(ascending = False)
-
+specify_colors = {'Noord Holland': 'rgb(176,23,31)','Utrecht':'rgb(0,0,255)', 'Zuid Holland': 'rgb(0,206,209)',
+                 'Groningen':'rgb(105,139,105)','Nederland':'rgb(255,128,0)','Zeeland':'rgb(139,34,82)',
+                 'Limburg':'rgb(75,0,130)','Noord Brabant':'rgb(131,139,131)','Gelderland':'rgb(139,139,0)',
+                 'Flevoland':'rgb(139,105,20)','Drenthe':'rgb(30,30,30)','Overijssel':'rgb(160,82,45)',
+                 'Friesland':'rgb(139,134,78)'}
 fig11 = px.scatter_mapbox(df_locatie,
-    lon = df_locatie_geo['LNG'], lat = df_locatie_geo['LAT'], color = df_locatie.Provincie,
+    lon = df_locatie_geo['LNG'], lat = df_locatie_geo['LAT'], color = df_locatie.Provincie, color_discrete_map = specify_colors,
                         mapbox_style = 'open-street-map', animation_group = 'Provincie', width = 1500, height = 1700, zoom = 7.5
     
                         
@@ -99,7 +103,7 @@ fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 0.75,'show
     ))
 #dataframe codes MAXIM Voertuigen######################################################################################################
 
-URL3 = requests.get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=j9OjMxvLi7CazM7CK2fssR5D5&$where=Datum_eerste_toelating>20180101&$select=Kenteken,Voertuigsoort,Merk,Handelsbenaming,Massa_rijklaar,Datum_eerste_toelating&$limit=1000000")
+URL3 = requests.get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=j9OjMxvLi7CazM7CK2fssR5D5&$where=Datum_eerste_toelating>20180101&$select=Kenteken,Voertuigsoort,Merk,Handelsbenaming,Massa_rijklaar,Datum_eerste_toelating&$limit=750000")
 z = URL3.json()
 df_kenteken = pd.DataFrame(z)
 URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=2500000")
