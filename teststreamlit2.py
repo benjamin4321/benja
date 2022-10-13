@@ -102,7 +102,7 @@ fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 0.75,'show
 URL3 = requests.get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=j9OjMxvLi7CazM7CK2fssR5D5&$where=Datum_eerste_toelating>20180101&$select=Kenteken,Voertuigsoort,Merk,Handelsbenaming,Massa_rijklaar,Datum_eerste_toelating&$limit=1000000")
 z = URL3.json()
 df_kenteken = pd.DataFrame(z)
-URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=3000000")
+URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=2500000")
 a = URL4.json()
 df_brandstof = pd.DataFrame(a)
 #df_brandstof
