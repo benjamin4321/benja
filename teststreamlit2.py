@@ -320,7 +320,7 @@ elif st.sidebar.button('Locaties', key = "8"):
     st.markdown('visualizaties voor de locaties per gemeente en provincie, hierbij wordt weer gekeken naar de laadpaal data en de OpenChargemap, om relevant informatie te tonen.')
     #st.plotly_chart(fig5)
     #st.plotly_chart(fig6)
-        st.sidebar.button('Return',key = "9")
+    st.sidebar.button('Return',key = "9")
 
 elif st.sidebar.button('Laadpaal', key = "10"):
         st.header('Charging stations')
