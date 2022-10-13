@@ -179,25 +179,25 @@ model = sm.OLS(Y, X).fit()
 predictions = model.predict(X) 
 print_model = model.summary()
 
-explanotory_data = pd.DataFrame({"ChargeTime": np.arange(0, 10)})
+#explanotory_data = pd.DataFrame({"ChargeTime": np.arange(0, 10)})
 
-mdl_con_vs_char = OLS("ConnectedTime ~ ChargeTime", data=df_laadpaal).fit()
+#mdl_con_vs_char = OLS("ConnectedTime ~ ChargeTime", data=df_laadpaal).fit()
 
-explanotory_data = pd.DataFrame({"ChargeTime": np.arange(0, 10)})
+#explanotory_data = pd.DataFrame({"ChargeTime": np.arange(0, 10)})
 
-prediction_data = explanotory_data.assign(ConnectedTime=mdl_con_vs_char.predict(explanotory_data))
+#prediction_data = explanotory_data.assign(ConnectedTime=mdl_con_vs_char.predict(explanotory_data))
 
-fig10 = plt.figure()
-sns.regplot(x="ChargeTime", y="ConnectedTime", ci=None, data=df_laadpaal)
-sns.scatterplot(x="ChargeTime", y="ConnectedTime", data=prediction_data, color="red", marker="s")
-plt.xlabel("Tijd aan het laden (uren)")
-plt.ylabel("Tijd aan laadpaal (uren)")
-plt.title("Voorspelling tijd verbonden aan laadpaal in verband met werkelijk aan het laden")
+#fig10 = plt.figure()
+#sns.regplot(x="ChargeTime", y="ConnectedTime", ci=None, data=df_laadpaal)
+#sns.scatterplot(x="ChargeTime", y="ConnectedTime", data=prediction_data, color="red", marker="s")
+#plt.xlabel("Tijd aan het laden (uren)")
+#plt.ylabel("Tijd aan laadpaal (uren)")
+#plt.title("Voorspelling tijd verbonden aan laadpaal in verband met werkelijk aan het laden")
 
 
-little_laadpaal = pd.DataFrame({"ChargeTime": [8]})
+#little_laadpaal = pd.DataFrame({"ChargeTime": [8]})
 
-pred_little_laadpaal = little_laadpaal.assign(ConnectedTime=mdl_con_vs_char.predict(little_laadpaal))
+#pred_little_laadpaal = little_laadpaal.assign(ConnectedTime=mdl_con_vs_char.predict(little_laadpaal))
 
 
 ##Dashboard Codes
