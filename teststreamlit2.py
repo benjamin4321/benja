@@ -92,7 +92,7 @@ fig11.update_layout(
 
 lat_foc = 52.09061
 lng_foc = 5.12143
-fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 1.0,'showactive': True,'active': 0,'buttons': dropdown_buttons}]},
+fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 0.45,'showactive': True,'active': 0,'buttons': dropdown_buttons}]},
     geo = dict(
     projection_scale = 11,
     center = dict(lat = lat_foc, lon=lng_foc)
@@ -321,6 +321,7 @@ elif st.sidebar.button('Locaties', key = "8"):
 
     st.markdown('visualizaties voor de locaties per gemeente en provincie, hierbij wordt weer gekeken naar de laadpaal data en de OpenChargemap, om relevant informatie te tonen.')
     st.plotly_chart(fig11)
+    st.markdown('Wat opvalt aan de plot is dat er een grote dichtheid aan laadpalen in Nederland aanwezig is.')
     st.sidebar.button('Return',key = "9")
 
 elif st.sidebar.button('Laadpaal', key = "10"):
