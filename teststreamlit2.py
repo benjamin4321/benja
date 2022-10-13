@@ -156,9 +156,9 @@ fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 0.75,'show
       #             {'label': 'Diesel', 'method': 'update','args': [{'visible': [False, False, False, True, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
     #               {'label': "Elektriciteit", 'method': "update",'args': [{"visible": [False, False, False, False, True, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
        #            {'label': "LNG", 'method': "update",'args': [{"visible": [False, False, False, False, False, True, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
-     #               {'label': "LPG", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, True, False]}, {'title': 'Aantal autos verkocht per maand'}]},
-        #            {'label': "Waterstof", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, True]}, {'title': 'Aantal autos verkocht per maand'}]}
-           #       ]
+        #            {'label': "LPG", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, True, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+          #          {'label': "Waterstof", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, True]}, {'title': 'Aantal autos verkocht per maand'}]}
+         #         ]
 #fig21.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.2,'y': 0.5,'showactive': True,'active': 0,'buttons': dropdown_buttons}]})
 
 
@@ -364,31 +364,31 @@ if st.sidebar.button('Home',key = "1"):
     st.sidebar.button('Statistic explanations',key = "5")
 #elif st.sidebar.button('Cases', key = "6"):
 #####################################################Voertuigen
-elif st.sidebar.button('Voertuigen', key = "6"):
-        st.header('Voertuigen')
-        st.markdown('**Dashboard Elektrische Voertuigen**') 
-        
-        
-        st.markdown('Hier worden visualisaties gemaakt over desbetreffend autos, die dan tegenover de verkoop permaand worden gezet.')
-        #st.plotly_chart(fig21)
-        
-        
-        st.markdown('Pie chart in percentages. waarbij de auto per brandstof in het totaal worden gevisualiseerd.')
-        #st.plotly_chart(fig22)
-        
-        
-        st.markdown('Aantal autos die verkocht worden per maand gesorteerd op type auto. Aantal voertuigen tegenover het gewicht.')
-        #st.plotly_chart(fig23)
-        
-        
-        #st.plotly_chart(fig24)
-    
-        
-        
+#elif st.sidebar.button('Voertuigen', key = "6"):
+#        st.header('Voertuigen')
+#        st.markdown('**Dashboard Elektrische Voertuigen**') 
+#        
+#        
+#        st.markdown('Hier worden visualisaties gemaakt over desbetreffend autos, die dan tegenover de verkoop permaand worden gezet.')
+#        #st.plotly_chart(fig21)
+#        
+#        
+#        st.markdown('Pie chart in percentages. waarbij de auto per brandstof in het totaal worden gevisualiseerd.')
+#        #st.plotly_chart(fig22)
+#        
+#        
+#        st.markdown('Aantal autos die verkocht worden per maand gesorteerd op type auto. Aantal voertuigen tegenover het gewicht.')
+#        #st.plotly_chart(fig23)
+#        
+#        
+#        #st.plotly_chart(fig24)
+#    
+#        
+#
+#
+#
+#        st.sidebar.button('Return',key = "7")
 
-
-        st.sidebar.button('Return',key = "7")
-#elif st.sidebar.button('Deaths', key = "8"):
 elif st.sidebar.button('Locaties', key = "8"):
     
     
