@@ -18,12 +18,12 @@ import streamlit as st
 
 
 #dataframe codes
-df_laadpaal = pd.read_csv("laadpaaldata.csv")
-df_laadpaal["TotalEnergy"] = df_laadpaal["TotalEnergy"] / 1000
-df_laadpaal["MaxPower"] = df_laadpaal["MaxPower"] / 1000
-df_laadpaal = df_laadpaal.drop(df_laadpaal[df_laadpaal.ChargeTime < 0].index)
-df_locatie = requests.get('https://api.openchargemap.io/v3/poi?key=123?output=json&countrycode=NL')
-df_locatie.json()
+#df_laadpaal = pd.read_csv("laadpaaldata.csv")
+#df_laadpaal["TotalEnergy"] = df_laadpaal["TotalEnergy"] / 1000
+#df_laadpaal["MaxPower"] = df_laadpaal["MaxPower"] / 1000
+#df_laadpaal = df_laadpaal.drop(df_laadpaal[df_laadpaal.ChargeTime < 0].index)
+#df_locatie = requests.get('https://api.openchargemap.io/v3/poi?key=123?output=json&countrycode=NL')
+#df_locatie.json()
 URL3 = requests.get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=j9OjMxvLi7CazM7CK2fssR5D5&$where=Datum_eerste_toelating>20180101&$select=Kenteken,Voertuigsoort,Merk,Handelsbenaming,Massa_rijklaar,Datum_eerste_toelating&$limit=1000000")
 z = URL3.json()
 df_kenteken = pd.DataFrame(z)
