@@ -100,41 +100,108 @@ fig11.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.1,'y': 0.75,'show
 #dataframe codes MAXIM Voertuigen######################################################################################################
 
 URL3 = requests.get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?$$app_token=j9OjMxvLi7CazM7CK2fssR5D5&$where=Datum_eerste_toelating>20180101&$select=Kenteken,Voertuigsoort,Merk,Handelsbenaming,Massa_rijklaar,Datum_eerste_toelating&$limit=1000000")
-#z = URL3.json()
-#df_kenteken = pd.DataFrame(z)
+z = URL3.json()
+df_kenteken = pd.DataFrame(z)
 URL4 = requests.get("https://opendata.rdw.nl/resource/8ys7-d773.json?$$app_token=VfcVY98pUi7UHzVmxqLl14OLS&$select=Kenteken,Brandstof_omschrijving&$limit=3000000")
-#a = URL4.json()
-#df_brandstof = pd.DataFrame(a)
+a = URL4.json()
+df_brandstof = pd.DataFrame(a)
 #df_brandstof
-#df_voertuigen = df_kenteken.merge(df_brandstof, on = "Kenteken", how = "inner")
+df_voertuigen = df_kenteken.merge(df_brandstof, on = "Kenteken", how = "inner")
 #df_voertuigen
-#df_voertuigen_na = df_voertuigen[df_voertuigen["Massa_rijklaar"].isna()]
+df_voertuigen_na = df_voertuigen[df_voertuigen["Massa_rijklaar"].isna()]
 #df_voertuigen_na
-#df_voertuigen = df_voertuigen.dropna()
-#df_voertuigen['Massa_rijklaar'] = df_voertuigen['Massa_rijklaar'].astype('int')
+df_voertuigen = df_voertuigen.dropna()
+df_voertuigen['Massa_rijklaar'] = df_voertuigen['Massa_rijklaar'].astype('int')
 #duplicates = df_voertuigen["Kenteken"].duplicated()
 #print(duplicates)
 #df_voertuigen[duplicates]
 
-#uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
+uitschieter = np.abs(stats.zscore(df_voertuigen['Massa_rijklaar']))
 #print(uitschieter)
 
-#df_voertuigen.drop(df_voertuigen[df_voertuigen.Massa_rijklaar > 20000].index, inplace=True)
+df_voertuigen.drop(df_voertuigen[df_voertuigen.Massa_rijklaar > 20000].index, inplace=True)
 #df_voertuigen.drop_duplicates(subset="Kenteken", keep = "first", inplace = True)
 
 #geen spel fouten
-#merk_handel = df_voertuigen['Merk'].value_counts().sort_values(ascending = False)
-#merk_handel.head(70)
+merk_handel = df_voertuigen['Merk'].value_counts().sort_values(ascending = False)
+merk_handel.head(70)
 
 #
-#df_voertuigen["Datum_eerste_toelating"] = pd.to_datetime(df_voertuigen['Datum_eerste_toelating'], format='%Y%m%d')
+df_voertuigen["Datum_eerste_toelating"] = pd.to_datetime(df_voertuigen['Datum_eerste_toelating'], format='%Y%m%d')
 #df_voertuigen.head()
 
-#df_voertuigen_aantal = df_voertuigen.groupby(["Datum_eerste_toelating", "Brandstof_omschrijving"])['Kenteken'].count().reset_index(name='aantal')
+df_voertuigen_aantal = df_voertuigen.groupby(["Datum_eerste_toelating", "Brandstof_omschrijving"])['Kenteken'].count().reset_index(name='aantal')
 #df_voertuigen_aantal
 
-#df_voertuigen_aantal['month_year'] = pd.to_datetime(df_voertuigen_aantal['Datum_eerste_toelating']).dt.to_period('M')
+df_voertuigen_aantal['month_year'] = pd.to_datetime(df_voertuigen_aantal['Datum_eerste_toelating']).dt.to_period('M')
 #df_voertuigen_aantal
+
+df_voertuigen_aantal2 = df_voertuigen_aantal.groupby(
+    ["month_year", "Brandstof_omschrijving"]
+)['aantal'].sum().reset_index(name='som')
+
+df_voertuigen_aantal2["month_year"] = df_voertuigen_aantal2["month_year"].astype(str)
+
+
+fig21 = px.line(df_voertuigen_aantal2, 
+              x="month_year", 
+              y="som", 
+              color = "Brandstof_omschrijving", 
+              title='Aantal autos verkocht per maand')
+
+dropdown_buttons = [  {'label': "Alles", 'method': "update",'args': [{"visible": [True, True, True, True, True, True, True, True]}, {'title': 'Aantal autos verkocht per maand'}]}, 
+                   {'label': 'Alcohol', 'method': 'update','args': [{'visible': [True, False, False, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},  
+                    {'label': 'Benzine', 'method': 'update','args': [{'visible': [False, True, False, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},  
+                    {'label': "CNG", 'method': "update",'args': [{"visible": [False, False, True, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+                   {'label': 'Diesel', 'method': 'update','args': [{'visible': [False, False, False, True, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+                   {'label': "Elektriciteit", 'method': "update",'args': [{"visible": [False, False, False, False, True, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+                   {'label': "LNG", 'method': "update",'args': [{"visible": [False, False, False, False, False, True, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+                    {'label': "LPG", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, True, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+                    {'label': "Waterstof", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, True]}, {'title': 'Aantal autos verkocht per maand'}]}
+                  ]
+fig21.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.2,'y': 0.5,'showactive': True,'active': 0,'buttons': dropdown_buttons}]})
+
+
+fig22 = px.pie(df_voertuigen_aantal2, values='som', names='Brandstof_omschrijving', title='Percentage van het aantal gekochte autos per brandstof ')
+
+df_voertuigen_soort_aantal = df_voertuigen.groupby(
+    ["Voertuigsoort", "Brandstof_omschrijving"]
+)['Kenteken'].count().reset_index(name='aantal')
+df_voertuigen_soort_aantal
+
+fig23 = px.bar(df_voertuigen_soort_aantal, x='Voertuigsoort', y='aantal', color = "Brandstof_omschrijving", title = 'Aantal autos verkocht per maand',
+            category_orders={"Brandstof_omschrijving": ["Alcohol", "Benzine", "CNG", "Diesel", "Elektriciteit", "LNG", "LPG", "Waterstof"]})
+
+dropdown_buttons = [  {'label': "Alles", 'method': "update",'args': [{"visible": [True, True, True, True, True, True, True, True]}, {'title': 'Aantal autos verkocht per maand'}]}, 
+                   {'label': 'Alcohol', 'method': 'update','args': [{'visible': [True, False, False, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},  
+                    {'label': 'Benzine', 'method': 'update','args': [{'visible': [False, True, False, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},  
+                    {'label': "CNG", 'method': "update",'args': [{"visible": [False, False, True, False, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+                   {'label': 'Diesel', 'method': 'update','args': [{'visible': [False, False, False, True, False, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+                   {'label': "Elektriciteit", 'method': "update",'args': [{"visible": [False, False, False, False, True, False, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+                   {'label': "LNG", 'method': "update",'args': [{"visible": [False, False, False, False, False, True, False, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+                    {'label': "LPG", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, True, False]}, {'title': 'Aantal autos verkocht per maand'}]},
+                    {'label': "Waterstof", 'method': "update",'args': [{"visible": [False, False, False, False, False, False, False, True]}, {'title': 'Aantal autos verkocht per maand'}]}
+                  ]
+fig23.update_layout({'updatemenus':[{'type': "dropdown",'x': 1.2,'y': 0.3,'showactive': True,'active': 0,'buttons': dropdown_buttons}, dict(
+                 buttons=[
+                     dict(label="Linear",  
+                          method="relayout", 
+                          args=[{"yaxis.type": "linear"}]),
+                     dict(label="Log", 
+                          method="relayout", 
+                          args=[{"yaxis.type": "log"}]),
+                                  ])]})
+
+df_voertuigen_gewicht = df_voertuigen
+
+df_voertuigen_gewicht.drop(df_voertuigen_gewicht[df_voertuigen_gewicht.Massa_rijklaar > 5000].index, inplace=True)
+
+fig = px.histogram(df_voertuigen_gewicht, x="Massa_rijklaar", color = 'Voertuigsoort', nbins = 20, marginal = "box")
+
+
+fig.update_layout(title="Aantal voertuigen per gewicht", xaxis_title="Gewicht (kg)", yaxis_title="Aantal")
+
+
 ####Code Laadpalen#### FLOOR Laadpalen #############################################################################################
 df_laadpaal = pd.read_csv("laadpaaldata.csv", index_col = "Started")
 
