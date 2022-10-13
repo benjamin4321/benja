@@ -181,7 +181,7 @@ print_model = model.summary()
 
 explanotory_data = pd.DataFrame({"ChargeTime": np.arange(0, 10)})
 
-#mdl_con_vs_char = ols("ConnectedTime ~ ChargeTime", data=df_laadpaal).fit()
+mdl_con_vs_char = OLS("ConnectedTime ~ ChargeTime", data=df_laadpaal).fit()
 
 explanotory_data = pd.DataFrame({"ChargeTime": np.arange(0, 10)})
 
