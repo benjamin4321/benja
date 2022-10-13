@@ -64,8 +64,8 @@ df_locatie1 = df_locatie['Provincie'].value_counts().sort_values(ascending = Fal
 
 fig11 = px.scatter_mapbox(df_locatie,
     lon = df_locatie_geo['LNG'], lat = df_locatie_geo['LAT'], color = df_locatie.Provincie,
-                        mapbox_style = 'open-street-map', animation_group = 'Provincie', width = 2300, height = 2000, zoom = 7.5,
-                        marker = dict(line_color='white', line_width=0.5)
+                        mapbox_style = 'open-street-map', animation_group = 'Provincie', width = 2300, height = 2000, zoom = 7.5
+    
                         
         
 )
