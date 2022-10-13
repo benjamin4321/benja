@@ -24,7 +24,7 @@ locatie1 = requests.get('https://api.openchargemap.io/v3/poi?key=123?output=json
 locatie2 = locatie1.json()
 df_locatie = pd.DataFrame(locatie2)
 
-addressinfo = df_locatie1['AddressInfo']
+addressinfo = df_locatie['AddressInfo']
 addressinfo.loc[0]
 lijst = []
 
