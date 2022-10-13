@@ -242,10 +242,9 @@ elif st.sidebar.button('Locaties', key = "8"):
 #elif st.sidebar.button('Vaccinations', key = "10"):
 elif st.sidebar.button('Laadpaal', key = "10"):
         st.header('Charging stations')
-        st.markdown('**Dashboard for the Charging stations**') 
-    #st.markdown('Here you can find some visualizations of total vaccinations around the world, per region, per country and per 100.000 inhabitants')
-    #st.markdown('In this charter there is going thoroughly research on the Charging station spread in the Netherlands, This will include but not limit itself to statistics explanations and visualizing this data in conprehensive charts.
+        st.markdown('**Dashboard for the Charging stations**')      
         st.markdown('Hier gaan we diepgaand analyseren hoe de laadpaal data eruit ziet en hoe munipulaties worden uitgevoerd om conclusies te maken. Ook word er visueel aangetond hoe statistische variabelen relatie hebben met elkaar.')
+        st.table(data='print_model')
     #st.plotly_chart(fig1)
     #st.plotly_chart(fig2)
         st.sidebar.button('Return',key = "11")
