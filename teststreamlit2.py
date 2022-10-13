@@ -311,14 +311,13 @@ elif st.sidebar.button('Voertuigen', key = "6"):
         st.sidebar.button('Return',key = "7")
 #elif st.sidebar.button('Deaths', key = "8"):
 elif st.sidebar.button('Locaties', key = "8"):
-        st.header('Provincies')
+    
+    
+    st.header('Provincies')
     st.markdown('Laadpalen in totaal gelegen in Nederland en bijbehorende provincie.')
     st.plotly_chart(fig11)
-    #st.header('Total Deaths')
-    #st.markdown('**Welcome to the Covid19 dashboard of total deaths**') 
-    #st.markdown('**Dashboard for the different provinces**') 
-    #st.markdown('Here you can find some visualizations of total deaths around the world, per region, per country and per 100.000 inhabitants')
-        st.markdown('visualizaties voor de locaties per gemeente en provincie, hierbij wordt weer gekeken naar de laadpaal data en de OpenChargemap, om relevant informatie te tonen.')
+
+    st.markdown('visualizaties voor de locaties per gemeente en provincie, hierbij wordt weer gekeken naar de laadpaal data en de OpenChargemap, om relevant informatie te tonen.')
     #st.plotly_chart(fig5)
     #st.plotly_chart(fig6)
         st.sidebar.button('Return',key = "9")
