@@ -19,8 +19,13 @@ import statsmodels.api as sm
 #!pip install streamlit
 import streamlit as st
 
+#Dataframe Roy Locaties
+locatie1 = requests.get('https://api.openchargemap.io/v3/poi?key=123?output=json&countrycode=NL&maxresults=20000')
+locatie2 = locatie1.json()
+df_locatie = pd.DataFrame(locatie2)
 
-#dataframe codes
+
+#dataframe codes MAXIM Voertuigen
 #df_laadpaal = pd.read_csv("laadpaaldata.csv")
 #df_laadpaal["TotalEnergy"] = df_laadpaal["TotalEnergy"] / 1000
 #df_laadpaal["MaxPower"] = df_laadpaal["MaxPower"] / 1000
@@ -63,7 +68,7 @@ import streamlit as st
 
 #df_voertuigen_aantal['month_year'] = pd.to_datetime(df_voertuigen_aantal['Datum_eerste_toelating']).dt.to_period('M')
 #df_voertuigen_aantal
-####Code Laadpalen####
+####Code Laadpalen#### FLOOR Laadpalen
 df_laadpaal = pd.read_csv("laadpaaldata.csv", index_col = "Started")
 
 df_laadpaal["TotalEnergy"] = df_laadpaal["TotalEnergy"] / 1000
